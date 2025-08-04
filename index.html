@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrolyte Status Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Electrolyte Status Prediction</h1>
+    <form action="/predict" method="POST">
+        <label for="sodium">Sodium (Na+):</label>
+        <input type="number" name="sodium" required><br>
+        
+        <label for="potassium">Potassium (K+):</label>
+        <input type="number" name="potassium" required><br>
+        
+        <label for="calcium">Calcium (Ca2+):</label>
+        <input type="number" name="calcium" required><br>
+        
+        <label for="magnesium">Magnesium (Mg2+):</label>
+        <input type="number" name="magnesium" required><br>
+        
+        <label for="chloride">Chloride (Cl-):</label>
+        <input type="number" name="chloride" required><br>
+        
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if predictions %}
+    <h2>Predictions</h2>
+    <ul>
+        {% for target, status in predictions.items() %}
+            <li>{{ target }}: {{ status }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
